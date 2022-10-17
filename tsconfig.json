@@ -1,26 +1,35 @@
 {
+  "include": ["src"],
+  "exclude": [
+    "dist",
+    "node_modules"
+  ],
   "compilerOptions": {
-    "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
     "allowJs": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx"
-  },
-  "include": [
-    "src"
-  ]
+	"allowSyntheticDefaultImports": true,
+	"baseUrl": ".",
+	"declaration": false,
+	"emitDecoratorMetadata": true,
+	"esModuleInterop": true,
+	"experimentalDecorators": true,
+	"forceConsistentCasingInFileNames": true,
+	"importHelpers": true,
+	"jsx": "react-jsx",
+	"lib": ["es2019", "dom", "esnext"],
+	"module": "commonjs",
+	"moduleResolution": "node",
+	"noEmit": true,
+	"noFallthroughCasesInSwitch": true,
+	"noImplicitOverride": true,
+	"noImplicitReturns": true,
+	"noPropertyAccessFromIndexSignature": true,
+	"noUnusedLocals": true,
+	"resolveJsonModule": true,
+	"rootDir": ".",
+	"skipDefaultLibCheck": true,
+	"skipLibCheck": true,
+	"sourceMap": true,
+	"strict": true,
+	"target": "es6"
+  }
 }
