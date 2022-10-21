@@ -1,15 +1,13 @@
 {
-	"include": ["src"],
 	"exclude": [
 		"dist",
-		"node_modules",
-		"src/**/*.spec.*",
-    	"src/**/*.test.*"
+		"node_modules"
 	],
 	"compilerOptions": {
 		"allowJs": true,
 		"allowSyntheticDefaultImports": true,
-		"baseUrl": "./src",
+		"baseUrl": ".",
+		"checkJs": true,
 		"declaration": true,
 		"declarationMap": true,
 		"emitDecoratorMetadata": true,
@@ -18,26 +16,19 @@
 		"forceConsistentCasingInFileNames": true,
 		"importHelpers": true,
 		"jsx": "react-jsx",
-		"lib": ["es2019", "dom", "esnext"],
-		"module": "commonjs",
-		"moduleResolution": "node",
 		"noEmit": false,
+		"rootDirs": ["../src"],
+		"rootDir": "../src",
 		"noFallthroughCasesInSwitch": true,
 		"noImplicitOverride": true,
 		"noImplicitReturns": true,
 		"noPropertyAccessFromIndexSignature": true,
 		"noUnusedLocals": true,
 		"resolveJsonModule": true,
-		"rootDirs": ["src"],
-		"rootDir": "src",
 		"skipDefaultLibCheck": true,
 		"skipLibCheck": true,
 		"sourceMap": true,
-		"strict": true,
-		"target": "es6",
-		"emitDeclarationOnly": false,
-		"isolatedModules": true,
-		"outDir": "dist"
+		"strict": true
 	},
-	"files": ["./src/index.ts"]
+	"files": ["../src/index.ts"]
 }
