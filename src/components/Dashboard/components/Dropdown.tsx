@@ -52,11 +52,11 @@ export const Dropdown = memo(({ item }: { item: INavItem }) => {
 						<IconButton
 							id={child.id}
 							disabled={child.disabled}
-							size='small'
+							size="small"
 							aria-label={child.label}
-							aria-controls='menu-appbar'
-							aria-haspopup='true'
-							color='inherit'
+							aria-controls="menu-appbar"
+							aria-haspopup="true"
+							color="inherit"
 						>
 							<Icon />
 						</IconButton>
@@ -119,12 +119,12 @@ export const Dropdown = memo(({ item }: { item: INavItem }) => {
 				<IconButton
 					id={item.id}
 					disabled={item.disabled}
-					size='small'
-					aria-label='hosted items'
-					aria-controls='menu-appbar'
+					size="small"
+					aria-label="hosted items"
+					aria-controls="menu-appbar"
 					aria-haspopup={!!menu}
 					onClick={(e) => handleClick(e, !!menu)}
-					color='inherit'
+					color="inherit"
 				>
 					<Icon />
 				</IconButton>

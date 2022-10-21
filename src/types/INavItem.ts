@@ -10,15 +10,13 @@ export interface INavItem {
 	label?: string;
 	tooltip?: string;
 	Icon?: OverridableComponent<SvgIconTypeMap> | JSX.Element;
-	// Avatar?: JSX.Element;
 	badge?: IBadge;
 	route?: IRoute;
-	hidden?: boolean;
 	disabled?: boolean;
 	selected?: boolean;
 	onClick?: (e: MouseEvent<HTMLElement>, item: INavItem) => void;
 	target?: string;
-	url?: string;
+	href?: string;
 	children?: INavItem[];
 	order?: number;
 }

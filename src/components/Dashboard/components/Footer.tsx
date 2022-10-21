@@ -1,6 +1,6 @@
 import { Box, styled } from '@mui/material';
 
-import { useLayoutContext } from '../../../LayoutContext';
+import { useLayoutContext } from '../../../context';
 
 export const StyledFooter = styled(Box)(
 	({ theme }) => `

@@ -5,7 +5,7 @@ import {
 	ChevronLeft as ChevronLeftIcon,
 } from '@mui/icons-material';
 
-import { useLayoutContext } from '../../../LayoutContext';
+import { useLayoutContext } from '../../../context';
 
 export const MenuBarToggleContainer = styled(Box)`
 	padding-left: 10px;
@@ -25,7 +25,7 @@ export const MenuBarToggle = ({ source }: { source: 'drawer' | 'header' }) => {
 		<Box sx={source === 'header' ? { mr: 2 } : { ml: 1 }}>
 			<IconButton
 				edge={source === 'header' ? 'start' : undefined}
-				color='inherit'
+				color="inherit"
 				onClick={() => toggleNavPanel?.(!isNavPanelOpen)}
 			>
 				{isNavPanelOpen ? <ChevronLeftIcon /> : <ExpandIcon />}

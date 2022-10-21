@@ -1,6 +1,6 @@
 import { Typography, styled } from '@mui/material';
 
-import { useLayoutContext } from '../../../LayoutContext';
+import { useLayoutContext } from '../../../context';
 
 export const StyledAppTitleWrapper = styled('div', { shouldForwardProp: (prop) => prop !== 'gapped' })<{
 	gapped?: boolean;
@@ -36,7 +36,7 @@ export const StyledAppHeaderWrapper = styled('div', { shouldForwardProp: (prop) 
 );
 
 export const Title = () => {
-	const { title, subTitle, ids } = useLayoutContext();
+	const { metadata, ids } = useLayoutContext();
 	// let icon: JSX.Element = null;
 	// if (Icon) {
 	// 	icon = Icon;
@@ -46,12 +46,12 @@ export const Title = () => {
 		<StyledAppHeaderWrapper>
 			{/* {icon} */}
 			<StyledAppTitleWrapper>
-				<StyledAppTitle id={ids?.title} variant='h6' noWrap>
-					{title}
+				<StyledAppTitle id={ids?.title} variant="h6" noWrap>
+					{metadata.short_name}
 				</StyledAppTitle>
-				{subTitle ? (
-					<StyledAppSubTitle id={ids?.subTitle} variant='subtitle2' noWrap>
-						{subTitle}
+				{metadata.name ? (
+					<StyledAppSubTitle id={ids?.subTitle} variant="subtitle2" noWrap>
+						{metadata.name}
 					</StyledAppSubTitle>
 				) : null}
 			</StyledAppTitleWrapper>

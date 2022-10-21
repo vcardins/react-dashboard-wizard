@@ -6,7 +6,7 @@ import { ILayoutProps } from '../../types';
 const forwardProps = ['backgroundImage'];
 
 const Background = styled('div', { shouldForwardProp: (prop) => !forwardProps.includes(prop as string) })<{
-	backgroundImage: string;
+	backgroundImage?: string;
 }>(
 	({ backgroundImage }) => `
 	display: flex;

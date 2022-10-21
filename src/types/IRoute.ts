@@ -1,15 +1,12 @@
-import { RouteObject } from 'react-router';
+import { RouteObject } from 'react-router-dom';
 
-import { ILayout } from './ILayout';
-import { UserRoles } from './UserRoles';
+import { ILayout, UserRoles, IPageMetaData } from './';
 
 export interface IRoute extends Omit<RouteObject, 'path'> {
 	auth?: UserRoles[];
-	path?: string;
-	title?: string;
-	disabled?: boolean;
+	path: string;
+	metadata?: IPageMetaData;
 	layout?: ILayout;
-	onClick?: () => void;
 }
 
 export type KeyedRoute = Record<string, IRoute>;

@@ -49,7 +49,7 @@ export const MenuItem = (props: INavItem & { tooltip?: string }) => {
 
 	if (tooltip) {
 		link = (
-			<Tooltip title={tooltip} placement='right' arrow={true}>
+			<Tooltip title={tooltip} placement="right" arrow={true}>
 				{link}
 			</Tooltip>
 		);

@@ -4,7 +4,7 @@ import { Dropdown } from './Dropdown';
 import { Title } from './Title';
 import { MenuBarToggle } from './MenuBarToggle';
 
-import { useLayoutContext } from '../../../LayoutContext';
+import { useLayoutContext } from '../../../context';
 
 export const StyledAppBar = styled(AppBar)(
 	({ theme }) => `
@@ -24,7 +24,7 @@ export const Header = () => {
 	return (
 		<StyledAppBar>
 			<Toolbar>
-				<MenuBarToggle source='header' />
+				<MenuBarToggle source="header" />
 				<Title />
 				{navigation?.top ? (
 					<>

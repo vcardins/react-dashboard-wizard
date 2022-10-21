@@ -1,23 +1,23 @@
-import { useMediaQuery, useTheme, Drawer as MuiDrawer, styled } from '@mui/material';
+import { Theme, useMediaQuery, useTheme, Drawer as MuiDrawer, styled } from '@mui/material';
 
 import { MenuItemsList } from './MenuItemsList';
 import { MenuBarToggle } from './MenuBarToggle';
 
-import { useLayoutContext } from '../../../LayoutContext';
+import { useLayoutContext } from '../../../context';
 
-export const StyledNavigation = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'isOpened' })<{ isOpened: boolean; }>(({ isOpened, theme }) => ({
+const getTransition = (theme: Theme, tag: 'enteringScreen' | 'leavingScreen') =>
+	theme.transitions.create('width', {
+		easing: theme.transitions.easing.sharp,
+		duration: theme.transitions.duration[tag] as number,
+	});
+
+export const StyledNavigation = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'isOpened' })<{
+	isOpened: boolean;
+}>(({ isOpened, theme }) => ({
 	width: isOpened ? 240 : theme.spacing(7),
 	height: '100%',
 	overflow: 'auto',
-	transition: isOpened
-		? theme.transitions.create('width', {
-				easing: theme.transitions.easing.sharp,
-				duration: theme.transitions.duration.enteringScreen,
-		})
-		: theme.transitions.create('width', {
-				easing: theme.transitions.easing.sharp,
-				duration: theme.transitions.duration.leavingScreen,
-		}),
+	transition: getTransition(theme, isOpened ? 'enteringScreen' : 'leavingScreen'),
 	'& .MuiDrawer-paper': {
 		position: 'static',
 		overflow: 'hidden',
@@ -39,7 +39,7 @@ export const MenuBar = () => {
 			isOpened={!!isNavPanelOpen}
 		>
 			<MenuItemsList />
-			<MenuBarToggle source='drawer' />
+			<MenuBarToggle source="drawer" />
 		</StyledNavigation>
 	);
 };

@@ -2,7 +2,7 @@ import { useLocation } from 'react-router-dom';
 import { List, Grid } from '@mui/material';
 
 import { MenuItem } from './MenuItem';
-import { useLayoutContext } from '../../../LayoutContext';
+import { useLayoutContext } from '../../../context';
 
 export const MenuItemsList = () => {
 	const { isNavPanelOpen, navigation } = useLayoutContext();
@@ -16,10 +16,8 @@ export const MenuItemsList = () => {
 				{navigation.side.map((nav) => (
 					<MenuItem
 						{...nav}
-						key={nav.route?.path}
-						tooltip={
-							!isNavPanelOpen ? `${nav.label}${nav.route?.disabled ? ' (Not Allowed)' : ''}` : undefined
-						}
+						key={nav.id}
+						tooltip={!isNavPanelOpen ? `${nav.label}${nav.disabled ? ' 🚫' : ''}` : undefined}
 						selected={pathname === nav.route?.path}
 					/>
 				))}
