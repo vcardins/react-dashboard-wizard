@@ -1,13 +1,12 @@
 {
 	"root": true,
 	"extends": [
-		"prettier",
-		"plugin:prettier/recommended",
 		"eslint:recommended",
 		"plugin:react/recommended",
 		"plugin:@typescript-eslint/eslint-recommended",
 		"plugin:@typescript-eslint/recommended",
-		"plugin:react/jsx-runtime"
+		"plugin:react/jsx-runtime",
+		"prettier"
 	],
 	"parser": "@typescript-eslint/parser",
 	"plugins": [
@@ -66,14 +65,6 @@
 		"@typescript-eslint/type-annotation-spacing": "off", // Require consistent spacing around type annotations (typedef-whitespace from TSLint)
 		"@typescript-eslint/unbound-method": "off", // Enforces unbound methods are called with their expected scope. (no-unbound-method from TSLint)
 		"@typescript-eslint/unified-signatures": "off", // Warns for any two overloads that could be unified into one. (unified-signatures from TSLint): "off", // ": "off", //
-		"@nrwl/nx/enforce-module-boundaries": [
-			"warn",
-			{
-				"enforceBuildableLibDependency": true,
-				"allow": [],
-				"depConstraints": [{ "sourceTag": "*", "onlyDependOnLibsWithTags": ["*"] }]
-			}
-		],
 		"for-direction": "off",
 		"getter-return": "off",
 		"no-async-promise-executor": "off",
@@ -509,9 +500,10 @@
 	},
 	"env": {
 		"browser": true,
-		"node": true
+		"node": true,
+		"jest": true
 	},
 	"globals": {
 		"JSX": true
 	}
-	}
+}

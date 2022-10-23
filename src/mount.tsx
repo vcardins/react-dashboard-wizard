@@ -1,4 +1,4 @@
-import React from 'react';
+import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter as Router } from 'react-router-dom';
 
@@ -22,5 +22,5 @@ export const mount = (props: IAppConfig) => {
 		</Router>
 	);
 
-	root.render(strictMode ? <React.StrictMode>{node}</React.StrictMode> : node);
+	root.render(strictMode ? <StrictMode>{node}</StrictMode> : node);
 };

@@ -1,4 +1,4 @@
-import { Layouts, IPageConfig, UserRoles } from '../../../../../src/types'; //'react-pages-layouts';
+import { Layouts, IPageConfig, UserRoles } from 'react-dashboard-wizard';
 
 import { PageKey } from '../../types';
 
