@@ -4,7 +4,8 @@ import type { OverridableComponent } from '@mui/material/OverridableComponent';
 
 import { IRoute, IAppConfig } from './';
 
-export interface IAppLayoutProps extends Pick<IAppConfig, 'theme' | 'pages' | 'onRouteChange' | 'navigation' | 'metadata'> {
+export interface IAppLayoutProps
+	extends Pick<IAppConfig, 'theme' | 'pages' | 'onRouteChange' | 'navigation' | 'metadata'> {
 	Icon?: OverridableComponent<SvgIconTypeMap> | JSX.Element;
 	children?: ReactNode;
 	components?: {

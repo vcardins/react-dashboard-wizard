@@ -4,12 +4,14 @@ import type { OverridableComponent } from '@mui/material/OverridableComponent';
 
 import { IBadge } from './IBadge';
 import { IRoute } from './IRoute';
+import { LabelPlacement } from './LabelPlacement';
 
 export interface INavItem {
 	id: string;
 	label?: string;
+	labelPlacement?: LabelPlacement;
 	tooltip?: string;
-	Icon?: OverridableComponent<SvgIconTypeMap> | JSX.Element;
+	Icon?: OverridableComponent<SvgIconTypeMap>;
 	badge?: IBadge;
 	route?: IRoute;
 	disabled?: boolean;

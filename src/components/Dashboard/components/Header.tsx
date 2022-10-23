@@ -1,17 +1,14 @@
 import { AppBar, Toolbar, Box, styled } from '@mui/material';
 
-import { Dropdown } from './Dropdown';
+import { MenuDropdown, MenuButton, MenuBarToggle } from './Navigation';
 import { Title } from './Title';
-import { MenuBarToggle } from './MenuBarToggle';
 
 import { useLayoutContext } from '../../../context';
 
-export const StyledAppBar = styled(AppBar)(
-	({ theme }) => `
+export const StyledAppBar = styled(AppBar)(({ theme }) => `
 	background-color: ${theme.palette.primary.dark};
 	color: ${theme.palette.secondary.contrastText};
-`,
-);
+`);
 
 export const ActionBar = styled(Box)`
 	gap: 10px;
@@ -30,8 +27,9 @@ export const Header = () => {
 					<>
 						<Box sx={{ flexGrow: 1 }} />
 						<ActionBar sx={{ display: { xs: 'none', md: 'flex' } }}>
-							{navigation.top.map((item) => (
-								<Dropdown key={item.id} item={item} />
+							{navigation.top.map((item) => (item.children?.length
+								? <MenuDropdown key={item.id} item={item} />
+								: <MenuButton key={item.id} item={item} />
 							))}
 						</ActionBar>
 					</>

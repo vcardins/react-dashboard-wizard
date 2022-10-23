@@ -13,7 +13,7 @@ export interface IAppConfig {
 	navigation?: INavigationZone;
 	pages: IPageConfig[];
 	App?: () => ReactElement;
-	Providers?: <T>(props: PropsWithChildren<T>) => ReactElement | ReactElement;
+	Providers?: (props: PropsWithChildren<unknown>) => ReactElement;
 	version?: string | ReactElement;
 	onRouteChange?: (route: IRoute) => void;
 }

@@ -1,4 +1,5 @@
-import { memo, useState, MouseEvent, useMemo, useRef, isValidElement } from 'react';
+import { useState, MouseEvent, useMemo, useRef, useCallback } from 'react';
+import { useNavigate } from 'react-router';
 
 import {
 	Popper,
@@ -7,68 +8,64 @@ import {
 	IconButton,
 	Menu,
 	MenuItem,
-	Icon as MuiIcon,
 	Tooltip,
 	ClickAwayListener,
-	SvgIconTypeMap,
+	Button,
 } from '@mui/material';
-import { Menu as MenuIcon } from '@mui/icons-material';
-import type { OverridableComponent } from '@mui/material/OverridableComponent';
 
-import { INavItem } from '../../../types';
+import { INavItem } from '../../../../types';
+import { getDefaultButtonProps } from './utils';
 
-export const Dropdown = memo(({ item }: { item: INavItem }) => {
+export const MenuDropdown = ({ item }: { item: INavItem }) => {
+	const navigate = useNavigate();
 	const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
 	const arrowRef = useRef<HTMLElement | null>(null);
 
-	const handleClick = (event: MouseEvent<HTMLButtonElement>, isDropDown = false) => {
-		if (!isDropDown) {
-			item.onClick?.(event, item);
-		} else {
-			setAnchorEl(event.currentTarget);
-		}
+	const handleMenuClick = (event: MouseEvent<HTMLButtonElement>) => {
+		setAnchorEl(event.currentTarget);
 	};
 
 	const handleClose = () => {
 		setAnchorEl(null);
 	};
 
+	const handleMenuOptionClick = useCallback((event: MouseEvent<HTMLButtonElement>, option: INavItem) => {
+		setAnchorEl(event.currentTarget);
+		if (option.route) {
+			navigate(option.route.path);
+			handleClose();
+		}
+
+		option.onClick?.(event, item);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [item]);
+
 	const open = Boolean(anchorEl);
 	const id = open ? 'simple-popover' : undefined;
 
 	const menu = useMemo(() => {
-		const options = (item.children || []).map((child) => {
-			const Icon = (
-				isValidElement(child.Icon) ? (
-					child.Icon
-				) : (
-					<MuiIcon component={child.Icon as OverridableComponent<SvgIconTypeMap>} />
-				)
-			) as any; // as INavItem['Icon'];
-
-			return (
-				<MenuItem key={child.id || child.label} onClick={(e) => child.onClick?.(e, child)}>
-					{Icon && (
-						<IconButton
-							id={child.id}
-							disabled={child.disabled}
-							size="small"
-							aria-label={child.label}
-							aria-controls="menu-appbar"
-							aria-haspopup="true"
-							color="inherit"
-						>
-							<Icon />
-						</IconButton>
-					)}
-					{child.label}
-				</MenuItem>
-			);
-		});
-
-		if (!options.length) {
-			return null;
-		}
+		const options = (item.children || []).map((child) => (
+			<MenuItem
+				key={child.id || child.label}
+				onClick={(e) => handleMenuOptionClick?.(e, child)}
+				sx={(theme) => ({ fontSize: theme.typography.fontSize })}
+			>
+				{child.Icon && (
+					<IconButton
+						id={id}
+						disabled={child.disabled}
+						size="small"
+						aria-label={child.label}
+						aria-controls="menu-appbar"
+						aria-haspopup="true"
+						color="inherit"
+					>
+						<child.Icon fontSize="small"/>
+					</IconButton>
+				)}
+				{child.label}
+			</MenuItem>
+		));
 
 		return (
 			<Menu
@@ -109,25 +106,17 @@ export const Dropdown = memo(({ item }: { item: INavItem }) => {
 				{options}
 			</Menu>
 		);
-	}, [anchorEl, item, id, open]);
+	}, [anchorEl, item, id, open, handleMenuOptionClick]);
 
-	const Icon = (item.Icon ?? MenuIcon) as any;
+	const buttonProps = getDefaultButtonProps(item, handleMenuClick);
 
 	return (
 		<div>
 			<Tooltip title={item?.label ?? ''} arrow={true}>
-				<IconButton
-					id={item.id}
-					disabled={item.disabled}
-					size="small"
-					aria-label="hosted items"
-					aria-controls="menu-appbar"
-					aria-haspopup={!!menu}
-					onClick={(e) => handleClick(e, !!menu)}
-					color="inherit"
-				>
-					<Icon />
-				</IconButton>
+				{item?.label
+					? <Button {...buttonProps} />
+					: <IconButton {...buttonProps} />
+				}
 			</Tooltip>
 			{menu ? (
 				<Popper
@@ -178,4 +167,4 @@ export const Dropdown = memo(({ item }: { item: INavItem }) => {
 			) : null}
 		</div>
 	);
-});
+};

@@ -3,7 +3,7 @@ import { Theme, useMediaQuery, useTheme, Drawer as MuiDrawer, styled } from '@mu
 import { MenuItemsList } from './MenuItemsList';
 import { MenuBarToggle } from './MenuBarToggle';
 
-import { useLayoutContext } from '../../../context';
+import { useLayoutContext } from '../../../../context';
 
 const getTransition = (theme: Theme, tag: 'enteringScreen' | 'leavingScreen') =>
 	theme.transitions.create('width', {

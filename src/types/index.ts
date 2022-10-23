@@ -1,5 +1,6 @@
 export * from './IAppConfig';
 export * from './IBadge';
+export * from './LabelPlacement';
 export * from './ILayout';
 export * from './ILayoutContext';
 export * from './IManifest';
