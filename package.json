@@ -81,5 +81,10 @@
 	},
 	"peerDependencies": {
 		"react": ">=17"
+	},
+	"alias": {
+		"context": "./src/context",
+		"types": "./src/types",
+		"components": "./src/components"
 	}
 }
