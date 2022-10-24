@@ -2,14 +2,12 @@ import { MouseEvent } from 'react';
 import type { SvgIconTypeMap } from '@mui/material';
 import type { OverridableComponent } from '@mui/material/OverridableComponent';
 
-import { IBadge } from './IBadge';
-import { IRoute } from './IRoute';
-import { LabelPlacement } from './LabelPlacement';
+import { IBadge, IRoute, Positioning } from './';
 
 export interface INavItem {
 	id: string;
 	label?: string;
-	labelPlacement?: LabelPlacement;
+	iconPositioning?: Positioning;
 	tooltip?: string;
 	Icon?: OverridableComponent<SvgIconTypeMap>;
 	badge?: IBadge;

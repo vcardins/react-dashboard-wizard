@@ -5,7 +5,7 @@ import { MenuItem } from './MenuItem';
 import { useLayoutContext } from '../../../../context';
 
 export const MenuItemsList = () => {
-	const { isNavPanelOpen, navigation } = useLayoutContext();
+	const { isNavPaneOpen, navigation } = useLayoutContext();
 	const { pathname } = useLocation();
 
 	if (!navigation?.side?.length) return null;
@@ -17,7 +17,7 @@ export const MenuItemsList = () => {
 					<MenuItem
 						{...nav}
 						key={nav.id}
-						tooltip={!isNavPanelOpen ? `${nav.label}${nav.disabled ? ' 🚫' : ''}` : undefined}
+						tooltip={!isNavPaneOpen ? `${nav.label}${nav.disabled ? ' 🚫' : ''}` : undefined}
 						selected={pathname === nav.route?.path}
 					/>
 				))}

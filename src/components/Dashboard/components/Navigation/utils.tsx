@@ -1,9 +1,9 @@
 import { MouseEvent } from 'react';
 import { ButtonProps } from '@mui/material';
-import { INavItem, LabelPlacement } from '../../../../types';
+import { INavItem, Positioning } from '../../../../types';
 
-export const getDefaultButtonProps = (item: INavItem, onClick?: (event: MouseEvent<HTMLButtonElement>) => void) => {
-	const { id, label, disabled, labelPlacement, Icon } = item;
+export const getDefaultButtonProps = <T extends object>(item: INavItem, onClick?: (event: MouseEvent<T>) => void) => {
+	const { id, label, disabled, iconPositioning, Icon } = item;
 
 	const buttonProps = {
 		id,
@@ -19,12 +19,12 @@ export const getDefaultButtonProps = (item: INavItem, onClick?: (event: MouseEve
 
 	if (Icon) {
 		if (label) {
-			const tag = labelPlacement === LabelPlacement.Left ? 'endIcon' : 'startIcon';
+			const tag = iconPositioning === Positioning.Right ? 'endIcon' : 'startIcon';
 			buttonProps[tag] = <Icon />;
 			buttonProps.children = item?.label;
 		}
 		else {
-			buttonProps.children = <Icon fontSize="small"/>;
+			buttonProps.children = <Icon fontSize="small" />;
 		}
 	}
 

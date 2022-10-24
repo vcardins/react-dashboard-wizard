@@ -13,5 +13,4 @@ function ProvidersFunc({ children }: PropsWithChildren<unknown>) {
 	);
 }
 
-
 export const Providers = memo(ProvidersFunc) as typeof ProvidersFunc;

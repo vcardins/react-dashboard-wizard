@@ -8,24 +8,24 @@ import { getDefaultButtonProps } from './utils';
 
 export const MenuButton = ({ item }: { item: INavItem }) => {
 	const navigate = useNavigate();
-	const handleClick = useCallback((event: MouseEvent<HTMLButtonElement>) => {
-		event.stopPropagation();
-		if (item.route) {
-			return navigate(item.route.path);
-		}
+	const handleClick = useCallback(
+		(event: MouseEvent<HTMLButtonElement>) => {
+			event.stopPropagation();
+			if (item.route) {
+				return navigate(item.route.path);
+			}
 
-		item.onClick?.(event, item);
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [item]);
+			item.onClick?.(event, item);
+		},
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+		[item],
+	);
 
-	const buttonProps = getDefaultButtonProps(item, handleClick);
+	const buttonProps = getDefaultButtonProps<HTMLButtonElement>(item, handleClick);
 
 	return (
 		<Tooltip title={item?.label ?? ''} arrow={true}>
-			{item?.label
-				? <Button {...buttonProps} />
-				: <IconButton {...buttonProps} />
-			}
+			{item?.label ? <Button {...buttonProps} /> : <IconButton {...buttonProps} />}
 		</Tooltip>
 	);
 };

@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import { ListItem, ListItemIcon, ListItemText, Tooltip, styled } from '@mui/material';
 
-import { INavItem, LabelPlacement } from '../../../../types';
+import { INavItem, Positioning } from '../../../../types';
 import { useLayoutContext } from '../../../../context';
 
 const StyledNavLink = styled(NavLink)`
@@ -9,7 +9,7 @@ const StyledNavLink = styled(NavLink)`
 	color: inherit;
 `;
 
-export const StyledListItem = styled(ListItem, { shouldForwardProp: (prop) => prop !== 'labelPlacement' })<{ labelPlacement?: LabelPlacement }>(({ labelPlacement, theme }) => `
+export const StyledListItem = styled(ListItem, { shouldForwardProp: (prop) => prop !== 'iconPositioning' })<{iconPositioning?: Positioning;}>(({ iconPositioning, theme }) => `
 	&.Mui-selected {
 		background-color: ${theme.palette.primary.light};
 		color: ${theme.palette.primary.dark};
@@ -19,18 +19,19 @@ export const StyledListItem = styled(ListItem, { shouldForwardProp: (prop) => pr
 		}
 	}
 
-	flex-direction: ${labelPlacement === LabelPlacement.Right
-		? 'row-reverse'
-		: labelPlacement === LabelPlacement.Left
+	flex-direction: ${
+		iconPositioning === Positioning.Right
+			? 'row-reverse'
+			: iconPositioning === Positioning.Left
 			? 'row'
-			: labelPlacement === LabelPlacement.Bottom
-				? 'column'
-				: labelPlacement === LabelPlacement.Top
-					? 'column-reverse'
-					: undefined
-};
+			: iconPositioning === Positioning.Bottom
+			? 'column'
+			: iconPositioning === Positioning.Top
+			? 'column-reverse'
+			: undefined
+	};
 
-	gap: ${labelPlacement && [LabelPlacement.Right, LabelPlacement.Left].includes(labelPlacement) ? theme.spacing(2.5) : 0};
+	gap: ${iconPositioning && [Positioning.Right, Positioning.Left].includes(iconPositioning) ? theme.spacing(2.5) : 0};
 
 	&:not(&.Mui-selected):hover {
 		background-color: ${theme.palette.primary.dark};
@@ -38,29 +39,38 @@ export const StyledListItem = styled(ListItem, { shouldForwardProp: (prop) => pr
 			color: ${theme.palette.common.white};
 		}
 	}
-`);
+`,
+);
 
-const StyledListItemIcon = styled(ListItemIcon, { shouldForwardProp: (prop) => prop !== 'selected' })<{ selected?: boolean }>(({ selected, theme }) => `
+const StyledListItemIcon = styled(ListItemIcon, { shouldForwardProp: (prop) => prop !== 'selected' })<{
+	selected?: boolean;
+}>(
+	({ selected, theme }) => `
 	min-width: auto;
 	color: ${selected ? theme.palette.common.white : theme.palette.primary.dark};
-`);
+`,
+);
 
-const StyledListItemText = styled(ListItemText, { shouldForwardProp: (prop) => prop !== 'hidden' })<{ hidden?: boolean }>(({ hidden }) => `
+const StyledListItemText = styled(ListItemText, { shouldForwardProp: (prop) => prop !== 'hidden' })<{
+	hidden?: boolean;
+}>(
+	({ hidden }) => `
 	white-space: nowrap;
 	visibility: ${hidden ? 'collapse' : 'visible'};
 	transition: visibility ease 0.25s;
-`);
+`,
+);
 
 export const MenuItem = (props: INavItem & { tooltip?: string }) => {
-	const { isNavPanelOpen } = useLayoutContext();
-	const { id, route, label, selected, tooltip, labelPlacement = LabelPlacement.Left, onClick } = props;
+	const { isNavPaneOpen } = useLayoutContext();
+	const { id, route, label, selected, tooltip, iconPositioning = Positioning.Left, onClick } = props;
 	const Icon = (props.Icon ? (props.Icon as INavItem['Icon']) : null) as any;
 
 	let link = (
 		<StyledListItem
 			id={id}
 			selected={selected}
-			labelPlacement={labelPlacement}
+			iconPositioning={iconPositioning}
 			onClick={(e) => onClick?.(e, props)}
 		>
 			{Icon ? (
@@ -70,7 +80,7 @@ export const MenuItem = (props: INavItem & { tooltip?: string }) => {
 			) : null}
 			<StyledListItemText
 				primary={label}
-				hidden={!isNavPanelOpen}
+				hidden={!isNavPaneOpen}
 			/>
 		</StyledListItem>
 	);

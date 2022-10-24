@@ -25,7 +25,7 @@ export const StyledNavigation = styled(MuiDrawer, { shouldForwardProp: (prop) =>
 }));
 
 export const MenuBar = () => {
-	const { isNavPanelOpen, toggleNavPanel, navigation } = useLayoutContext();
+	const { isNavPaneOpen, toggleNavPane: toggleNavPane, navigation } = useLayoutContext();
 	const theme = useTheme();
 	const isLargeScreen = useMediaQuery(theme.breakpoints.up('sm'));
 
@@ -34,9 +34,9 @@ export const MenuBar = () => {
 	return (
 		<StyledNavigation
 			variant={isLargeScreen ? 'permanent' : 'temporary'}
-			open={!isLargeScreen && isNavPanelOpen ? true : false}
-			onClose={() => toggleNavPanel?.(!isNavPanelOpen)}
-			isOpened={!!isNavPanelOpen}
+			open={!isLargeScreen && isNavPaneOpen ? true : false}
+			onClose={() => toggleNavPane?.(!isNavPaneOpen)}
+			isOpened={!!isNavPaneOpen}
 		>
 			<MenuItemsList />
 			<MenuBarToggle source="drawer" />

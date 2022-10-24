@@ -1,6 +1,6 @@
 import { People as PeopleIcon, Pages as PagesIcon } from '@mui/icons-material';
 
-import { INavigationZone, LabelPlacement } from 'react-dashboard-wizard';
+import { INavigationZone, Positioning } from 'react-dashboard-wizard';
 
 import { PageKey } from '../types';
 import { Page1PageConfig } from './page1';
@@ -30,7 +30,6 @@ export const navigation: INavigationZone = {
 			id: getNavId(PageKey.Page1),
 			label: 'Page 1',
 			Icon: PeopleIcon,
-			labelPlacement: LabelPlacement.Left,
 			route: Page1PageConfig.routes.find(({ id }) => id === PageKey.Page1),
 		},
 		{
@@ -50,8 +49,7 @@ export const navigation: INavigationZone = {
 					Icon: PagesIcon,
 					route: Page2PageConfig.routes.find(({ id }) => id === PageKey.Page2),
 				},
-			]
-			// route: Page2PageConfig.routes.find(({ id }) => id === PageKey.Page2),
+			],
 		},
 	],
 };

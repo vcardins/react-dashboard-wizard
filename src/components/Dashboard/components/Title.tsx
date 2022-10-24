@@ -2,7 +2,10 @@ import { Typography, styled } from '@mui/material';
 
 import { useLayoutContext } from '../../../context';
 
-export const StyledAppTitleWrapper = styled('div', { shouldForwardProp: (prop) => prop !== 'gapped' })<{ gapped?: boolean; }>(({ theme, gapped }) => `
+export const StyledAppTitleWrapper = styled('div', { shouldForwardProp: (prop) => prop !== 'gapped' })<{
+	gapped?: boolean;
+}>(
+	({ theme, gapped }) => `
 	display: flex;
 	flex-direction: column;
 	margin-left: ${!gapped ? theme.spacing(2) : 0};

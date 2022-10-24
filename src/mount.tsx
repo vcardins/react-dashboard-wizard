@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 import { IAppConfig } from './types';
-import { LayoutProvider } from './context';
+import { LayoutContextProvider } from './context';
 
 export const mount = (props: IAppConfig) => {
 	const {
@@ -18,7 +18,7 @@ export const mount = (props: IAppConfig) => {
 
 	const node = (
 		<Router basename={basename}>
-			<Providers>{App ? <App /> : <LayoutProvider {...rest} />}</Providers>
+			<Providers>{App ? <App /> : <LayoutContextProvider {...rest} />}</Providers>
 		</Router>
 	);
 

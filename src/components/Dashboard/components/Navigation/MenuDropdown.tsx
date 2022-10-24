@@ -1,17 +1,7 @@
 import { useState, MouseEvent, useMemo, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router';
 
-import {
-	Popper,
-	Fade,
-	Paper,
-	IconButton,
-	Menu,
-	MenuItem,
-	Tooltip,
-	ClickAwayListener,
-	Button,
-} from '@mui/material';
+import { Popper, Fade, Paper, IconButton, Menu, MenuItem, Tooltip, ClickAwayListener, Button } from '@mui/material';
 
 import { INavItem } from '../../../../types';
 import { getDefaultButtonProps } from './utils';
@@ -29,16 +19,18 @@ export const MenuDropdown = ({ item }: { item: INavItem }) => {
 		setAnchorEl(null);
 	};
 
-	const handleMenuOptionClick = useCallback((event: MouseEvent<HTMLButtonElement>, option: INavItem) => {
-		setAnchorEl(event.currentTarget);
-		if (option.route) {
-			navigate(option.route.path);
-			handleClose();
-		}
+	const handleMenuOptionClick = useCallback(
+		(event: MouseEvent<HTMLLIElement>, option: INavItem) => {
+			if (option.route) {
+				navigate(option.route.path);
+				handleClose();
+			}
 
-		option.onClick?.(event, item);
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [item]);
+			option.onClick?.(event, item);
+		},
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+		[item],
+	);
 
 	const open = Boolean(anchorEl);
 	const id = open ? 'simple-popover' : undefined;
@@ -60,7 +52,7 @@ export const MenuDropdown = ({ item }: { item: INavItem }) => {
 						aria-haspopup="true"
 						color="inherit"
 					>
-						<child.Icon fontSize="small"/>
+						<child.Icon fontSize="small" />
 					</IconButton>
 				)}
 				{child.label}
@@ -108,15 +100,12 @@ export const MenuDropdown = ({ item }: { item: INavItem }) => {
 		);
 	}, [anchorEl, item, id, open, handleMenuOptionClick]);
 
-	const buttonProps = getDefaultButtonProps(item, handleMenuClick);
+	const buttonProps = getDefaultButtonProps<HTMLButtonElement>(item, handleMenuClick);
 
 	return (
 		<div>
 			<Tooltip title={item?.label ?? ''} arrow={true}>
-				{item?.label
-					? <Button {...buttonProps} />
-					: <IconButton {...buttonProps} />
-				}
+				{item?.label ? <Button {...buttonProps} /> : <IconButton {...buttonProps} />}
 			</Tooltip>
 			{menu ? (
 				<Popper

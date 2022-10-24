@@ -13,7 +13,7 @@ export const MenuBarToggleContainer = styled(Box)`
 `;
 
 export const MenuBarToggle = ({ source }: { source: 'drawer' | 'header' }) => {
-	const { isNavPanelOpen, toggleNavPanel, navigation } = useLayoutContext();
+	const { isNavPaneOpen, toggleNavPane: toggleNavPane, navigation } = useLayoutContext();
 
 	if (!navigation?.side?.length) {
 		return null;
@@ -26,9 +26,9 @@ export const MenuBarToggle = ({ source }: { source: 'drawer' | 'header' }) => {
 			<IconButton
 				edge={source === 'header' ? 'start' : undefined}
 				color="inherit"
-				onClick={() => toggleNavPanel?.(!isNavPanelOpen)}
+				onClick={() => toggleNavPane?.(!isNavPaneOpen)}
 			>
-				{isNavPanelOpen ? <ChevronLeftIcon /> : <ExpandIcon />}
+				{isNavPaneOpen ? <ChevronLeftIcon /> : <ExpandIcon />}
 			</IconButton>
 		</Box>
 	);
