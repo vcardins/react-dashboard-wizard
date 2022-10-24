@@ -1,9 +1,9 @@
-import { useMemo, createContext, useContext, useEffect, useState } from 'react';
+import { useMemo, createContext, useContext, useEffect, useState, useCallback } from 'react';
 import { matchRoutes, RouteObject, useLocation, useRoutes } from 'react-router-dom';
 import { ThemeProvider as MuiThemeProvider, CssBaseline } from '@mui/material';
 import { ThemeProvider as EmotionThemeProvider } from '@emotion/react';
 
-import { IRoute, IAppLayoutContext, IAppLayoutProps, Layouts } from '../types';
+import { IRoute, IAppLayoutContext, IAppLayoutProps, Layouts, INavigationZone, ISettings, Positioning } from '../types';
 import { AuthLayout, EmptyLayout, DashboardLayout } from '../components';
 
 export const LayoutMap = {
@@ -12,18 +12,34 @@ export const LayoutMap = {
 	[Layouts.Dashboard]: DashboardLayout,
 };
 
+const defaultSettings = {
+	sideNavigation: {
+		labelPositioning: Positioning.Left,
+		fontSize: '14px',
+	},
+	topNavigation: {
+		labelPositioning: Positioning.Left,
+		fontSize: '14px',
+	},
+};
+
 const LayoutContext = createContext<IAppLayoutContext>({
 	id: '',
 	renderedRoutes: null,
 	metadata: {} as IAppLayoutProps['metadata'],
 	activeRoute: {} as IRoute,
-	isNavPanelOpen: false,
-	toggleNavPanel: () => undefined,
+	isNavPaneOpen: false,
+	settings: defaultSettings,
+	toggleNavPane: () => undefined,
+	updateNavigation: (value: INavigationZone) => console.log(value),
+	updateSettings: (value: ISettings) => console.log(value),
 });
 
-export const LayoutProvider = (props: IAppLayoutProps) => {
+export const LayoutContextProvider = (props: IAppLayoutProps) => {
 	const { metadata, children, pages, theme, onRouteChange, ...rest } = props;
-	const [isNavPanelOpen, toggleNavPanel] = useState(false);
+	const [isNavPaneOpen, toggleNavPane] = useState(!!rest.isNavPaneOpen);
+	const [settings, setSettings] = useState({ ...defaultSettings, ...rest.settings });
+	const [navigation, setNavigation] = useState(rest.navigation);
 
 	const location = useLocation();
 	const routes = pages.flatMap(({ routes, auth, layout }) =>
@@ -52,6 +68,20 @@ export const LayoutProvider = (props: IAppLayoutProps) => {
 	const PageLayout = LayoutMap[layoutStyle];
 	const layoutId = `layout-${layoutStyle}`;
 
+	const updateSettings = useCallback((value: Partial<ISettings>) => {
+		setSettings((prevValue) => ({
+			...prevValue,
+			...value,
+		}));
+	}, []);
+
+	const updateNavigation = useCallback((value: Partial<INavigationZone>) => {
+		setNavigation((prevValue) => ({
+			...prevValue,
+			...value,
+		}));
+	}, []);
+
 	const value = useMemo<IAppLayoutContext>(
 		() => ({
 			...rest,
@@ -59,10 +89,26 @@ export const LayoutProvider = (props: IAppLayoutProps) => {
 			id: layoutId,
 			renderedRoutes,
 			activeRoute,
-			isNavPanelOpen,
-			toggleNavPanel,
+			settings,
+			navigation,
+			isNavPaneOpen,
+			toggleNavPane,
+			updateSettings,
+			updateNavigation,
 		}),
-		[rest, layoutId, metadata, renderedRoutes, activeRoute, isNavPanelOpen, toggleNavPanel],
+		[
+			rest,
+			layoutId,
+			metadata,
+			renderedRoutes,
+			activeRoute,
+			isNavPaneOpen,
+			navigation,
+			settings,
+			toggleNavPane,
+			updateSettings,
+			updateNavigation,
+		],
 	);
 
 	return (
@@ -71,7 +117,11 @@ export const LayoutProvider = (props: IAppLayoutProps) => {
 				<EmotionThemeProvider theme={theme}>
 					<>
 						<CssBaseline />
-						<PageLayout id={layoutId} activeRoute={activeRoute} renderedRoutes={renderedRoutes} />
+						<PageLayout
+							id={layoutId}
+							activeRoute={activeRoute}
+							renderedRoutes={renderedRoutes}
+						/>
 						{children}
 					</>
 				</EmotionThemeProvider>

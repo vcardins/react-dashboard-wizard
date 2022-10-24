@@ -11,4 +11,5 @@ export * from './IPageConfig';
 export * from './IPageMetaData';
 export * from './Layouts';
 export * from './PageModes';
+export * from './ISettings';
 export * from './UserRoles';
