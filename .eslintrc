@@ -22,7 +22,7 @@
 		"@typescript-eslint/explicit-function-return-type": "off",
 		"@typescript-eslint/no-parameter-properties": "off",
 		"@typescript-eslint/no-use-before-define": "warn",
-		"@typescript-eslint/indent": ["error", "tab", { "SwitchCase": 1 }], // Enforce consistent indentation (indent from TSLint)
+		"@typescript-eslint/indent": ["warn", "tab", { "SwitchCase": 1 }], // Enforce consistent indentation (indent from TSLint)
 		"@typescript-eslint/adjacent-overload-signatures": "off", // Require that member overloads be consecutive (adjacent-overload-signatures from TSLint)
 		"@typescript-eslint/array-type": "off", // Requires using either T[] or Array<T> for arrays (array-type from TSLint)
 		"@typescript-eslint/ban-types": "off", // Enforces that types will not to be used (ban-types from TSLint)
@@ -221,7 +221,7 @@
 		"array-bracket-spacing": ["error", "never"],
 		"array-element-newline": "off",
 		"block-spacing": ["error", "always"],
-		"brace-style": ["error", "stroustrup"],
+		"brace-style": ["warn", "stroustrup"],
 		"camelcase": ["warn", { "properties": "always" }],
 		"capitalized-comments": "off",
 		"comma-dangle": ["error", "always-multiline"],
