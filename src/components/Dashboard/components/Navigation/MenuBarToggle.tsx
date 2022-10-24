@@ -15,7 +15,7 @@ export const MenuBarToggleContainer = styled(Box)`
 export const MenuBarToggle = ({ source }: { source: 'drawer' | 'header' }) => {
 	const { isNavPaneOpen, toggleNavPane: toggleNavPane, navigation } = useLayoutContext();
 
-	if (!navigation?.side?.length) {
+	if (!navigation?.navbar?.length) {
 		return null;
 	}
 

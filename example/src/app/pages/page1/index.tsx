@@ -6,7 +6,7 @@ import Page1 from './Page1';
 
 export const Page1PageConfig: IPageConfig = {
 	layout: Layouts.Dashboard,
-	auth: [UserRoles.User],
+	allowedRoles: [UserRoles.User],
 	routes: [
 		{
 			id: PageKey.Page1,

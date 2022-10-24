@@ -8,12 +8,12 @@ export const MenuItemsList = () => {
 	const { isNavPaneOpen, navigation } = useLayoutContext();
 	const { pathname } = useLocation();
 
-	if (!navigation?.side?.length) return null;
+	if (!navigation?.navbar?.length) return null;
 
 	return (
 		<Grid sx={{ flex: 1, overflowY: 'auto', overflowX: 'hidden' }}>
 			<List sx={{ p: 0 }}>
-				{navigation.side.map((nav) => (
+				{navigation.navbar.map((nav) => (
 					<MenuItem
 						{...nav}
 						key={nav.id}

@@ -5,12 +5,10 @@ import { Title } from './Title';
 
 import { useLayoutContext } from '../../../context';
 
-export const StyledAppBar = styled(AppBar)(
-	({ theme }) => `
-	background-color: ${theme.palette.primary.dark};
-	color: ${theme.palette.secondary.contrastText};
-`,
-);
+export const StyledAppBar = styled(AppBar)(({ theme }) => `
+	background-color: ${theme.palette.common.white};
+	color: ${theme.palette.common.black};
+`);
 
 export const ActionBar = styled(Box)`
 	gap: 10px;
@@ -25,11 +23,11 @@ export const Header = () => {
 			<Toolbar>
 				<MenuBarToggle source="header" />
 				<Title />
-				{navigation?.top ? (
+				{navigation?.toolbar ? (
 					<>
 						<Box sx={{ flexGrow: 1 }} />
 						<ActionBar sx={{ display: { xs: 'none', md: 'flex' } }}>
-							{navigation.top.map((item) =>
+							{navigation.toolbar.map((item) =>
 								item.children?.length ? (
 									<MenuDropdown key={item.id} item={item} />
 								) : (

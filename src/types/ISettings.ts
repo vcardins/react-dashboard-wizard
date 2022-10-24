@@ -1,13 +1,19 @@
 import { CSSProperties } from 'react';
 
-import { Positioning } from './Positioning';
+import { Positioning, LayoutStyle, LayoutMode } from './';
 
 interface INavigationSettings {
-	labelPositioning?: Positioning;
+	display: boolean;
+	iconPositioning: Positioning;
 	fontSize: CSSProperties['fontSize'];
 }
 
 export interface ISettings {
-	sideNavigation?: INavigationSettings;
-	topNavigation?: INavigationSettings;
+	style: LayoutStyle;
+	mode: LayoutMode;
+	containerWidth: CSSProperties['width'];
+	navbar: INavigationSettings & {
+		position: Positioning.Left | Positioning.Right;
+	};
+	toolbar: INavigationSettings;
 }

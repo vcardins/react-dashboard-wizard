@@ -3,10 +3,12 @@ import { useNavigate } from 'react-router';
 
 import { IconButton, Tooltip, Button } from '@mui/material';
 
+import { useLayoutContext } from '../../../../context';
 import { INavItem } from '../../../../types';
 import { getDefaultButtonProps } from './utils';
 
 export const MenuButton = ({ item }: { item: INavItem }) => {
+	const { settings } = useLayoutContext();
 	const navigate = useNavigate();
 	const handleClick = useCallback(
 		(event: MouseEvent<HTMLButtonElement>) => {
@@ -21,7 +23,7 @@ export const MenuButton = ({ item }: { item: INavItem }) => {
 		[item],
 	);
 
-	const buttonProps = getDefaultButtonProps<HTMLButtonElement>(item, handleClick);
+	const buttonProps = getDefaultButtonProps<HTMLButtonElement>(item, settings.toolbar.iconPositioning, handleClick);
 
 	return (
 		<Tooltip title={item?.label ?? ''} arrow={true}>

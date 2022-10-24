@@ -3,7 +3,7 @@ import { Layouts } from './Layouts';
 import { UserRoles } from './UserRoles';
 
 export interface IPageConfig {
-	auth?: UserRoles[];
+	allowedRoles?: UserRoles[];
 	routes: IRoute[];
 	layout: Layouts;
 }

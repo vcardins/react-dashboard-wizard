@@ -3,7 +3,7 @@ import { matchRoutes, RouteObject, useLocation, useRoutes } from 'react-router-d
 import { ThemeProvider as MuiThemeProvider, CssBaseline } from '@mui/material';
 import { ThemeProvider as EmotionThemeProvider } from '@emotion/react';
 
-import { IRoute, IAppLayoutContext, IAppLayoutProps, Layouts, INavigationZone, ISettings, Positioning } from '../types';
+import { IRoute, IAppLayoutContext, IAppLayoutProps, Layouts, INavigation, ISettings, LayoutStyle, LayoutMode, Positioning } from '../types';
 import { AuthLayout, EmptyLayout, DashboardLayout } from '../components';
 
 export const LayoutMap = {
@@ -12,13 +12,19 @@ export const LayoutMap = {
 	[Layouts.Dashboard]: DashboardLayout,
 };
 
-const defaultSettings = {
-	sideNavigation: {
-		labelPositioning: Positioning.Left,
+const defaultSettings: ISettings = {
+	style: LayoutStyle.Vertical,
+	mode: LayoutMode.FullWidth,
+	containerWidth: '1570px',
+	navbar: {
+		display: true,
+		iconPositioning: Positioning.Left,
+		position: Positioning.Left,
 		fontSize: '14px',
 	},
-	topNavigation: {
-		labelPositioning: Positioning.Left,
+	toolbar: {
+		display: true,
+		iconPositioning: Positioning.Left,
 		fontSize: '14px',
 	},
 };
@@ -31,7 +37,7 @@ const LayoutContext = createContext<IAppLayoutContext>({
 	isNavPaneOpen: false,
 	settings: defaultSettings,
 	toggleNavPane: () => undefined,
-	updateNavigation: (value: INavigationZone) => console.log(value),
+	updateNavigation: (value: INavigation) => console.log(value),
 	updateSettings: (value: ISettings) => console.log(value),
 });
 
@@ -42,8 +48,8 @@ export const LayoutContextProvider = (props: IAppLayoutProps) => {
 	const [navigation, setNavigation] = useState(rest.navigation);
 
 	const location = useLocation();
-	const routes = pages.flatMap(({ routes, auth, layout }) =>
-		routes.map((route) => ({ auth, layout, ...route })),
+	const routes = pages.flatMap(({ routes, allowedRoles, layout }) =>
+		routes.map((route) => ({ allowedRoles, layout, ...route })),
 	) as IRoute[];
 	const activeRoute = matchRoutes(routes as RouteObject[], location)?.[0]?.route as IRoute;
 
@@ -75,7 +81,7 @@ export const LayoutContextProvider = (props: IAppLayoutProps) => {
 		}));
 	}, []);
 
-	const updateNavigation = useCallback((value: Partial<INavigationZone>) => {
+	const updateNavigation = useCallback((value: Partial<INavigation>) => {
 		setNavigation((prevValue) => ({
 			...prevValue,
 			...value,
@@ -117,11 +123,7 @@ export const LayoutContextProvider = (props: IAppLayoutProps) => {
 				<EmotionThemeProvider theme={theme}>
 					<>
 						<CssBaseline />
-						<PageLayout
-							id={layoutId}
-							activeRoute={activeRoute}
-							renderedRoutes={renderedRoutes}
-						/>
+						<PageLayout id={layoutId} activeRoute={activeRoute} renderedRoutes={renderedRoutes} />
 						{children}
 					</>
 				</EmotionThemeProvider>

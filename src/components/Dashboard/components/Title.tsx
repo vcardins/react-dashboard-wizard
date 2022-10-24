@@ -2,27 +2,29 @@ import { Typography, styled } from '@mui/material';
 
 import { useLayoutContext } from '../../../context';
 
-export const StyledAppTitleWrapper = styled('div', { shouldForwardProp: (prop) => prop !== 'gapped' })<{
-	gapped?: boolean;
-}>(
-	({ theme, gapped }) => `
+export const StyledAppTitleWrapper = styled('div')`
 	display: flex;
 	flex-direction: column;
-	margin-left: ${!gapped ? theme.spacing(2) : 0};
-`,
-);
+`;
+
+const StyledAppIcon = styled('div')(({ theme }) => `
+	display: flex;
+	flex-direction: column;
+	margin-right: ${theme.spacing(2)};
+`);
 
 export const StyledAppTitle = styled(Typography)`
 	display: {
 		xs: none;
 		sm: block;
 	}
-	line-height: 1.4;
+	line-height: 1.25;
 	cursor: default;
 `;
 
 export const StyledAppSubTitle = styled(StyledAppTitle)`
-	opacity: 0.7;
+	opacity: 0.5;
+	font-size: 80%;
 `;
 
 export const StyledAppHeaderWrapper = styled('div', { shouldForwardProp: (prop) => prop !== 'gapped' })<{
@@ -36,10 +38,18 @@ export const StyledAppHeaderWrapper = styled('div', { shouldForwardProp: (prop) 
 );
 
 export const Title = () => {
-	const { metadata, ids } = useLayoutContext();
+	const { metadata, Icon, ids } = useLayoutContext();
 
 	return (
 		<StyledAppHeaderWrapper>
+			{Icon ?
+				(
+					<StyledAppIcon>
+						{Icon}
+					</StyledAppIcon>
+				)
+				: null
+			}
 			<StyledAppTitleWrapper>
 				<StyledAppTitle id={ids?.title} variant="h6" noWrap>
 					{metadata.short_name}

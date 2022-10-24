@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { Theme, useMediaQuery, useTheme, Drawer as MuiDrawer, styled } from '@mui/material';
 
 import { MenuItemsList } from './MenuItemsList';
@@ -14,22 +15,26 @@ const getTransition = (theme: Theme, tag: 'enteringScreen' | 'leavingScreen') =>
 export const StyledNavigation = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'isOpened' })<{
 	isOpened: boolean;
 }>(({ isOpened, theme }) => ({
-	width: isOpened ? 240 : theme.spacing(7),
+	width: isOpened ? (theme.mixins.navbar?.width ?? '220px') : theme.spacing(7),
 	height: '100%',
 	overflow: 'auto',
 	transition: getTransition(theme, isOpened ? 'enteringScreen' : 'leavingScreen'),
 	'& .MuiDrawer-paper': {
+		backgroundColor: theme.mixins.navbar?.backgroundColor ?? theme.palette.primary.main,
+		color: theme.mixins.navbar?.color ?? theme.palette.common.white,
 		position: 'static',
 		overflow: 'hidden',
 	},
 }));
 
-export const MenuBar = () => {
-	const { isNavPaneOpen, toggleNavPane: toggleNavPane, navigation } = useLayoutContext();
+export const MenuBar = memo(() => {
+	const { isNavPaneOpen, toggleNavPane, navigation, settings } = useLayoutContext();
 	const theme = useTheme();
 	const isLargeScreen = useMediaQuery(theme.breakpoints.up('sm'));
 
-	if (!navigation?.side?.length) return null;
+	if (!navigation?.navbar?.length || !settings.navbar.display) {
+		return null;
+	}
 
 	return (
 		<StyledNavigation
@@ -42,4 +47,4 @@ export const MenuBar = () => {
 			<MenuBarToggle source="drawer" />
 		</StyledNavigation>
 	);
-};
+});

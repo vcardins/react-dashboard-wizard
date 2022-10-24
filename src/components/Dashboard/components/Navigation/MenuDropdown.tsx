@@ -3,11 +3,13 @@ import { useNavigate } from 'react-router';
 
 import { Popper, Fade, Paper, IconButton, Menu, MenuItem, Tooltip, ClickAwayListener, Button } from '@mui/material';
 
+import { useLayoutContext } from '../../../../context';
 import { INavItem } from '../../../../types';
 import { getDefaultButtonProps } from './utils';
 
 export const MenuDropdown = ({ item }: { item: INavItem }) => {
 	const navigate = useNavigate();
+	const { settings } = useLayoutContext();
 	const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
 	const arrowRef = useRef<HTMLElement | null>(null);
 
@@ -100,7 +102,7 @@ export const MenuDropdown = ({ item }: { item: INavItem }) => {
 		);
 	}, [anchorEl, item, id, open, handleMenuOptionClick]);
 
-	const buttonProps = getDefaultButtonProps<HTMLButtonElement>(item, handleMenuClick);
+	const buttonProps = getDefaultButtonProps<HTMLButtonElement>(item, settings.toolbar.iconPositioning, handleMenuClick);
 
 	return (
 		<div>

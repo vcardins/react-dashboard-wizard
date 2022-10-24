@@ -10,26 +10,27 @@ const StyledNavLink = styled(NavLink)`
 `;
 
 export const StyledListItem = styled(ListItem, { shouldForwardProp: (prop) => prop !== 'iconPositioning' })<{iconPositioning?: Positioning;}>(({ iconPositioning, theme }) => `
-	&.Mui-selected {
-		background-color: ${theme.palette.primary.light};
-		color: ${theme.palette.primary.dark};
+	padding-top: ${theme.mixins.navbar?.padding ?? theme.spacing(0.5)};
+	padding-bottom: ${theme.mixins.navbar?.padding ?? theme.spacing(0.5)};
 
-		.MuiTypography-root {
-			color: ${theme.palette.common.white};
-		}
+	.MuiTypography-root {
+		color: ${theme.palette.common.white};
 	}
 
-	flex-direction: ${
-		iconPositioning === Positioning.Right
-			? 'row-reverse'
-			: iconPositioning === Positioning.Left
+	&.Mui-selected {
+		background-color: ${theme.palette.primary.light};
+	}
+
+	flex-direction: ${iconPositioning === Positioning.Right
+		? 'row-reverse'
+		: iconPositioning === Positioning.Left
 			? 'row'
 			: iconPositioning === Positioning.Bottom
-			? 'column'
-			: iconPositioning === Positioning.Top
-			? 'column-reverse'
-			: undefined
-	};
+				? 'column'
+				: iconPositioning === Positioning.Top
+					? 'column-reverse'
+					: undefined
+};
 
 	gap: ${iconPositioning && [Positioning.Right, Positioning.Left].includes(iconPositioning) ? theme.spacing(2.5) : 0};
 
@@ -39,15 +40,14 @@ export const StyledListItem = styled(ListItem, { shouldForwardProp: (prop) => pr
 			color: ${theme.palette.common.white};
 		}
 	}
-`,
-);
+`);
 
 const StyledListItemIcon = styled(ListItemIcon, { shouldForwardProp: (prop) => prop !== 'selected' })<{
 	selected?: boolean;
 }>(
-	({ selected, theme }) => `
+	({ theme }) => `
 	min-width: auto;
-	color: ${selected ? theme.palette.common.white : theme.palette.primary.dark};
+	color: ${theme.palette.common.white};
 `,
 );
 
@@ -62,15 +62,15 @@ const StyledListItemText = styled(ListItemText, { shouldForwardProp: (prop) => p
 );
 
 export const MenuItem = (props: INavItem & { tooltip?: string }) => {
-	const { isNavPaneOpen } = useLayoutContext();
-	const { id, route, label, selected, tooltip, iconPositioning = Positioning.Left, onClick } = props;
+	const { isNavPaneOpen, settings } = useLayoutContext();
+	const { id, route, label, selected, tooltip, onClick } = props;
 	const Icon = (props.Icon ? (props.Icon as INavItem['Icon']) : null) as any;
 
 	let link = (
 		<StyledListItem
 			id={id}
 			selected={selected}
-			iconPositioning={iconPositioning}
+			iconPositioning={settings.navbar.iconPositioning}
 			onClick={(e) => onClick?.(e, props)}
 		>
 			{Icon ? (
@@ -78,10 +78,7 @@ export const MenuItem = (props: INavItem & { tooltip?: string }) => {
 					<Icon />
 				</StyledListItemIcon>
 			) : null}
-			<StyledListItemText
-				primary={label}
-				hidden={!isNavPaneOpen}
-			/>
+			<StyledListItemText primary={label} hidden={!isNavPaneOpen} />
 		</StyledListItem>
 	);
 

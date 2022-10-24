@@ -2,8 +2,8 @@ import { MouseEvent } from 'react';
 import { ButtonProps } from '@mui/material';
 import { INavItem, Positioning } from '../../../../types';
 
-export const getDefaultButtonProps = <T extends object>(item: INavItem, onClick?: (event: MouseEvent<T>) => void) => {
-	const { id, label, disabled, iconPositioning, Icon } = item;
+export const getDefaultButtonProps = <T extends object>(item: INavItem, iconPositioning: Positioning, onClick?: (event: MouseEvent<T>) => void) => {
+	const { id, label, disabled, Icon } = item;
 
 	const buttonProps = {
 		id,
@@ -22,8 +22,7 @@ export const getDefaultButtonProps = <T extends object>(item: INavItem, onClick?
 			const tag = iconPositioning === Positioning.Right ? 'endIcon' : 'startIcon';
 			buttonProps[tag] = <Icon />;
 			buttonProps.children = item?.label;
-		}
-		else {
+		} else {
 			buttonProps.children = <Icon fontSize="small" />;
 		}
 	}
