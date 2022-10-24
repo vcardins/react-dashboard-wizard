@@ -11,9 +11,6 @@
 		"css-loader": "^6.7.1",
 		"parcel": "^2.7.0",
 		"process": "^0.11.10",
-		"react": "^18.2.0",
-		"react-dom": "^18.2.0",
-		"react-router-dom": "^6.4.2",
 		"ts-loader": "^9.4.1",
 		"typescript": "^4.8.4"
 	},
@@ -22,6 +19,11 @@
 		"@emotion/styled": "^11.10.4",
 		"@mui/icons-material": "^5.10.9",
 		"@mui/material": "^5.10.10",
+		"react": "^18.2.0",
+		"react-addons-css-transition-group": "^15.6.2",
+		"react-dom": "^18.2.0",
+		"react-router-dom": "^6.4.2",
+		"screenfull": "^6.0.2",
 		"react-dashboard-wizard": "latest"
 	},
 	"peerDependencies": {

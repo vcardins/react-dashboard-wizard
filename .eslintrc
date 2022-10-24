@@ -353,7 +353,7 @@
 		"react/button-has-type": "off", // Forbid "button" element without an explicit "type" attribute
 		"react/default-props-match-prop-types": "off", // Prevent extraneous defaultProps on components
 		"react/destructuring-assignment": "off", // Rule enforces consistent usage of destructuring assignment in component
-		"react/display-name": "error", // Prevent missing displayName in a React component definition
+		"react/display-name": "off", // Prevent missing displayName in a React component definition
 		"react/forbid-component-props": "off", // Forbid certain props on Components
 		"react/forbid-dom-props": "off", // Forbid certain props on DOM Nodes
 		"react/forbid-elements": "off", // Forbid certain elements

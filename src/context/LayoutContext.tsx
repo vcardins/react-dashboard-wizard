@@ -68,6 +68,7 @@ export const LayoutContextProvider = (props: IAppLayoutProps) => {
 
 	const renderedRoutes = useRoutes(
 		routesValues.map(({ caseSensitive, path, element, children }) => ({ caseSensitive, path, element, children })),
+		location
 	);
 
 	const layoutStyle = activeRoute?.layout?.mode ?? Layouts.Empty;
@@ -123,7 +124,11 @@ export const LayoutContextProvider = (props: IAppLayoutProps) => {
 				<EmotionThemeProvider theme={theme}>
 					<>
 						<CssBaseline />
-						<PageLayout id={layoutId} activeRoute={activeRoute} renderedRoutes={renderedRoutes} />
+						<PageLayout
+							id={layoutId}
+							activeRoute={activeRoute}
+							renderedRoutes={renderedRoutes}
+						/>
 						{children}
 					</>
 				</EmotionThemeProvider>

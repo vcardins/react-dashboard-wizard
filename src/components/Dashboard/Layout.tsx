@@ -26,7 +26,9 @@ export const DashboardLayout = ({ id, renderedRoutes }: ILayoutProps) => (
 		<InnerContainer>
 			<MenuBar />
 			<Main>
-				<Suspense fallback={<LinearProgress />}>{renderedRoutes}</Suspense>
+				<Suspense fallback={<LinearProgress />}>
+					{renderedRoutes}
+				</Suspense>
 			</Main>
 		</InnerContainer>
 		<Footer />
