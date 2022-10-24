@@ -1,6 +1,14 @@
-import { People as PeopleIcon, Pages as PagesIcon } from '@mui/icons-material';
+import screenfull from 'screenfull';
 
-import { INavigationZone, Positioning } from 'react-dashboard-wizard';
+import {
+	People as PeopleIcon,
+	Pages as PagesIcon,
+	VerifiedUser as VerifiedUserIcon,
+	Fullscreen as FullscreenIcon,
+	FullscreenExit as FullscreenExitIcon,
+	Settings as SettingsIcon,
+} from '@mui/icons-material';
+
 
 import { PageKey } from '../types';
 import { Page1PageConfig } from './page1';
@@ -10,8 +18,8 @@ import { getNavId } from './utils';
 
 export const pages = [Page1PageConfig, Page2PageConfig];
 
-export const navigation: INavigationZone = {
-	side: [
+export const navigation: INavigation = {
+	navbar: [
 		{
 			id: getNavId(PageKey.Page1),
 			label: 'Page 1',
@@ -25,29 +33,31 @@ export const navigation: INavigationZone = {
 			route: Page2PageConfig.routes.find(({ id }) => id === PageKey.Page2),
 		},
 	],
-	top: [
+	toolbar: [
 		{
-			id: getNavId(PageKey.Page1),
-			label: 'Page 1',
-			Icon: PeopleIcon,
-			route: Page1PageConfig.routes.find(({ id }) => id === PageKey.Page1),
+			id: 'fullscreen',
+			tooltip: 'Fullscreen toggle',
+			Icon: !screenfull.isFullscreen ? FullscreenIcon : FullscreenExitIcon,
+			onClick: () => {
+				if (screenfull.isEnabled) {
+					screenfull.toggle();
+				}
+			},
 		},
 		{
-			id: getNavId(PageKey.Page2),
-			label: 'Page 2',
-			Icon: PagesIcon,
+			id: 'my-account',
+			label: 'My Account',
+			Icon: VerifiedUserIcon,
 			children: [
 				{
-					id: getNavId(PageKey.Page1),
-					label: 'Page 1',
+					id: 'user-profile',
+					label: 'Profile',
 					Icon: PeopleIcon,
-					route: Page1PageConfig.routes.find(({ id }) => id === PageKey.Page1),
 				},
 				{
-					id: getNavId(PageKey.Page2),
-					label: 'Page 2',
-					Icon: PagesIcon,
-					route: Page2PageConfig.routes.find(({ id }) => id === PageKey.Page2),
+					id: 'my-settings',
+					label: 'Settings',
+					Icon: SettingsIcon,
 				},
 			],
 		},

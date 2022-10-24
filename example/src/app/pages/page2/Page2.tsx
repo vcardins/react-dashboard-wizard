@@ -1,8 +1,18 @@
 import { memo } from 'react';
 
-import { Box } from '@mui/material';
+import { AccountBox as AccountBoxIcon } from '@mui/icons-material';
 
-const Page2 = memo(() => <Box>Page 2</Box>);
+import { Frameset } from '../../../../../src'; // 'react-dashboard-wizard';
+
+const Page2 = memo(() => (
+	<Frameset
+		id="page-page2"
+		header={{ title: 'Page 2', icon: AccountBoxIcon }}
+		contentProps={{ overflow: 'auto', padding: 2 }}
+	>
+		<div>Page 2</div>
+	</Frameset>
+));
 
 Page2.displayName = 'Page2';
 

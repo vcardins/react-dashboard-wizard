@@ -7,6 +7,8 @@ export enum ThemeMode {
 
 const { palette } = createTheme();
 
+const TOOLBAR_MIN_HEIGHT = '56px';
+
 export const buildTheme = (mode = ThemeMode.Light, themeColor?: string) =>
 	responsiveFontSizes(
 		createTheme({
@@ -16,7 +18,6 @@ export const buildTheme = (mode = ThemeMode.Light, themeColor?: string) =>
 					light: themeColor ? lighten(themeColor, 0.25) : palette.primary.light,
 					main: themeColor ? themeColor : palette.primary.main,
 					dark: themeColor ? darken(themeColor, 0.5) : palette.primary.dark,
-					contrastText: '#fff',
 				},
 			},
 			shadows: [
@@ -113,14 +114,6 @@ export const buildTheme = (mode = ThemeMode.Light, themeColor?: string) =>
 					leavingScreen: 195,
 				},
 			},
-			// spacing: {
-			// 	unit: 8,
-			// 	small: 4,
-			// 	normal: 8,
-			// 	medium: 12,
-			// 	large: 16,
-			// 	mini: 2,
-			// },
 			zIndex: {
 				mobileStepper: 1000,
 				appBar: 1100,
@@ -131,13 +124,23 @@ export const buildTheme = (mode = ThemeMode.Light, themeColor?: string) =>
 			},
 			mixins: {
 				toolbar: {
-					minHeight: 56,
+					minHeight: TOOLBAR_MIN_HEIGHT,
 					'@media (min-width:0) and (orientation: landscape)': {
-						minHeight: 56,
+						minHeight: TOOLBAR_MIN_HEIGHT,
 					},
 					'@media (min-width:600px)': {
-						minHeight: 56,
+						minHeight: TOOLBAR_MIN_HEIGHT,
 					},
+				},
+				frameset: {
+					header: {
+						padding: '1rem',
+						backgroundColor: 'rgb(241, 245, 249)',
+					}
+				},
+				navbar: {
+					width: '200px',
+					padding: '0.75rem',
 				},
 			},
 		}),
