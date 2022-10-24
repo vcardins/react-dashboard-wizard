@@ -1,6 +1,6 @@
 import { Typography, styled } from '@mui/material';
 
-import { useLayoutContext } from '../../../context';
+import { useLayoutContext } from 'context';
 
 export const StyledAppTitleWrapper = styled('div')`
 	display: flex;

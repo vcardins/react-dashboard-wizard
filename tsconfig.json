@@ -37,7 +37,12 @@
 		"target": "es6",
 		"emitDeclarationOnly": false,
 		"isolatedModules": true,
-		"outDir": "dist"
+		"outDir": "dist",
+		"paths": {
+			"context": ["./src/context"],
+			"types": ["./src/types"],
+			"components": ["./src/components"]
+		}
 	},
 	"files": ["./src/index.ts"]
 }

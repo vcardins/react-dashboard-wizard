@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router';
 
 import { IconButton, Tooltip, Button } from '@mui/material';
 
-import { useLayoutContext } from '../../../../context';
-import { INavItem } from '../../../../types';
+import { useLayoutContext } from 'context';
+import { INavItem } from 'types';
 import { getDefaultButtonProps } from './utils';
 
 export const MenuButton = ({ item }: { item: INavItem }) => {

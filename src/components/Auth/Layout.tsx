@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import { styled, LinearProgress } from '@mui/material';
 
-import { ILayoutProps } from '../../types';
+import { ILayoutProps } from 'types';
 
 const forwardProps = ['backgroundImage'];
 
