@@ -15,7 +15,7 @@ const getTransition = (theme: Theme, tag: 'enteringScreen' | 'leavingScreen') =>
 export const StyledNavigation = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'isOpened' })<{
 	isOpened: boolean;
 }>(({ isOpened, theme }) => ({
-	width: isOpened ? (theme.mixins.navbar?.width ?? '220px') : theme.spacing(7),
+	width: isOpened ? theme.mixins.navbar?.width ?? '220px' : theme.spacing(7),
 	height: '100%',
 	overflow: 'auto',
 	transition: getTransition(theme, isOpened ? 'enteringScreen' : 'leavingScreen'),

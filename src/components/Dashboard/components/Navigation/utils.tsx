@@ -2,7 +2,11 @@ import { MouseEvent } from 'react';
 import { ButtonProps } from '@mui/material';
 import { INavItem, Positioning } from '../../../../types';
 
-export const getDefaultButtonProps = <T extends object>(item: INavItem, iconPositioning: Positioning, onClick?: (event: MouseEvent<T>) => void) => {
+export const getDefaultButtonProps = <T extends object>(
+	item: INavItem,
+	iconPositioning: Positioning,
+	onClick?: (event: MouseEvent<T>) => void,
+) => {
 	const { id, label, disabled, Icon } = item;
 
 	const buttonProps = {

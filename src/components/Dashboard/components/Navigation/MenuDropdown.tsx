@@ -102,7 +102,11 @@ export const MenuDropdown = ({ item }: { item: INavItem }) => {
 		);
 	}, [anchorEl, item, id, open, handleMenuOptionClick]);
 
-	const buttonProps = getDefaultButtonProps<HTMLButtonElement>(item, settings.toolbar.iconPositioning, handleMenuClick);
+	const buttonProps = getDefaultButtonProps<HTMLButtonElement>(
+		item,
+		settings.toolbar.iconPositioning,
+		handleMenuClick,
+	);
 
 	return (
 		<div>

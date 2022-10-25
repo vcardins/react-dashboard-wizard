@@ -3,7 +3,17 @@ import { matchRoutes, RouteObject, useLocation, useRoutes } from 'react-router-d
 import { ThemeProvider as MuiThemeProvider, CssBaseline } from '@mui/material';
 import { ThemeProvider as EmotionThemeProvider } from '@emotion/react';
 
-import { IRoute, IAppLayoutContext, IAppLayoutProps, Layouts, INavigation, ISettings, LayoutStyle, LayoutMode, Positioning } from '../types';
+import {
+	IRoute,
+	IAppLayoutContext,
+	IAppLayoutProps,
+	Layouts,
+	INavigation,
+	ISettings,
+	LayoutStyle,
+	LayoutMode,
+	Positioning,
+} from '../types';
 import { AuthLayout, EmptyLayout, DashboardLayout } from '../components';
 
 export const LayoutMap = {
@@ -37,8 +47,8 @@ const LayoutContext = createContext<IAppLayoutContext>({
 	isNavPaneOpen: false,
 	settings: defaultSettings,
 	toggleNavPane: () => undefined,
-	updateNavigation: (value: INavigation) => console.log(value),
-	updateSettings: (value: ISettings) => console.log(value),
+	updateNavigation: (_value: INavigation) => undefined,
+	updateSettings: (_value: ISettings) => undefined,
 });
 
 export const LayoutContextProvider = (props: IAppLayoutProps) => {
@@ -68,7 +78,7 @@ export const LayoutContextProvider = (props: IAppLayoutProps) => {
 
 	const renderedRoutes = useRoutes(
 		routesValues.map(({ caseSensitive, path, element, children }) => ({ caseSensitive, path, element, children })),
-		location
+		location,
 	);
 
 	const layoutStyle = activeRoute?.layout?.mode ?? Layouts.Empty;
