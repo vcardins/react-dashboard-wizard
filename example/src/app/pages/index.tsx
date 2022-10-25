@@ -9,6 +9,7 @@ import {
 	Settings as SettingsIcon,
 } from '@mui/icons-material';
 
+import { INavigation } from '../../../../src'; //'react-dashboard-wizard';
 
 import { PageKey } from '../types';
 import { Page1PageConfig } from './page1';
