@@ -1,7 +1,9 @@
 {
 	"exclude": [
 		"dist",
-		"node_modules"
+		"node_modules",
+		"../src/**/*.spec.*",
+		"../src/**/*.test.*"
 	],
 	"compilerOptions": {
 		"allowJs": true,
@@ -28,7 +30,17 @@
 		"skipDefaultLibCheck": true,
 		"skipLibCheck": true,
 		"sourceMap": true,
-		"strict": true
+		"strict": true,
+		"typeRoots": [
+			"@types",
+			"node_modules/@types",
+			"../typings/mixins.d.ts"
+		],
+		"paths": {
+			"context": ["../src/context"],
+			"types": ["../src/types"],
+			"components": ["../src/components"]
+		}
 	},
-	"files": ["../src/index.ts"]
+	"files": ["../src/index.ts", "../typings/mixins.d.ts"]
 }
