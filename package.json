@@ -31,8 +31,8 @@
 		"prettier": "prettier --write \"{src,tests,example/src}/**/*.{js,ts,jsx,tsx}\"",
 		"test": "jest --config jestconfig.json",
 		"build": "npm run clean && npm run build:esm && npm run build:cjs",
-		"build:esm": "tsc -p ./configs/tsconfig.esm.json && mv dist/esm/index.js dist/esm/index.mjs",
-		"build:cjs": "tsc -p ./configs/tsconfig.cjs.json",
+		"build:esm": "tsc -p ./tsconfigs/tsconfig.esm.json && mv dist/esm/index.js dist/esm/index.mjs",
+		"build:cjs": "tsc -p ./tsconfigs/tsconfig.cjs.json",
 		"prepare": "npm run build",
 		"prepublishOnly": "npm test && npm run prettier && npm run lint"
 	},
