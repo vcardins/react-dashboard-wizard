@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import { Toolbar, Box, LinearProgress, styled } from '@mui/material';
 
-import { ILayoutProps } from 'types';
+import { ILayoutProps } from '../../types';
 import { Footer, Header, Main, MenuBar } from './components';
 
 const OuterContainer = styled(Box)`

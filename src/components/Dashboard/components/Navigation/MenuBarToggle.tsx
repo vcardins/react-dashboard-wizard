@@ -5,7 +5,7 @@ import {
 	ChevronLeft as ChevronLeftIcon,
 } from '@mui/icons-material';
 
-import { useLayoutContext } from 'context';
+import { useLayoutContext } from '../../../../context';
 
 export const MenuBarToggleContainer = styled(Box)`
 	padding-left: 10px;

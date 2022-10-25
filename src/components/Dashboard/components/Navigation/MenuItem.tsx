@@ -1,8 +1,8 @@
 import { NavLink } from 'react-router-dom';
 import { ListItem, ListItemIcon, ListItemText, Tooltip, styled } from '@mui/material';
 
-import { INavItem, Positioning } from 'types';
-import { useLayoutContext } from 'context';
+import { useLayoutContext } from '../../../../context';
+import { INavItem, Positioning } from '../../../../types';
 
 const StyledNavLink = styled(NavLink)`
 	text-decoration: none;

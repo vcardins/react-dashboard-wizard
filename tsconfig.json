@@ -10,14 +10,8 @@
 	"compilerOptions": {
 		"typeRoots": [
 			"@types",
-			"node_modules/@types",
-			"./typings/mixins.d.ts"
-		],
-		"paths": {
-			"context": ["context"],
-			"types": ["types"],
-			"components": ["components"]
-		}
+			"node_modules/@types"
+		]
 	},
-	"files": ["./src/index.ts"]
+	"files": ["./src/index.ts", "./typings/mixins.d.ts"]
 }

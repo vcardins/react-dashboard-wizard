@@ -2,7 +2,7 @@ import { useLocation } from 'react-router-dom';
 import { List, Grid } from '@mui/material';
 
 import { MenuItem } from './MenuItem';
-import { useLayoutContext } from 'context';
+import { useLayoutContext } from '../../../../context';
 
 export const MenuItemsList = () => {
 	const { isNavPaneOpen, navigation } = useLayoutContext();

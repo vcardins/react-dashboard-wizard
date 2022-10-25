@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router';
 
 import { Popper, Fade, Paper, IconButton, Menu, MenuItem, Tooltip, ClickAwayListener, Button } from '@mui/material';
 
-import { useLayoutContext } from 'context';
-import { INavItem } from 'types';
+import { useLayoutContext } from '../../../../context';
+import { INavItem } from '../../../../types';
 import { getDefaultButtonProps } from './utils';
 
 export const MenuDropdown = ({ item }: { item: INavItem }) => {

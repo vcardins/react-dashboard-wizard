@@ -3,7 +3,7 @@ import { AppBar, Toolbar, Box, styled } from '@mui/material';
 import { MenuDropdown, MenuButton, MenuBarToggle } from './Navigation';
 import { Title } from './Title';
 
-import { useLayoutContext } from 'context';
+import { useLayoutContext } from '../../../context';
 
 export const StyledAppBar = styled(AppBar)(({ theme }) => `
 	background-color: ${theme.palette.common.white};
