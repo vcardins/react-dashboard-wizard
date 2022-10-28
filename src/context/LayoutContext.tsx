@@ -7,24 +7,22 @@ import {
 	IRoute,
 	IAppLayoutContext,
 	IAppLayoutProps,
-	Layouts,
+	LayoutStyle,
 	INavigation,
 	ISettings,
-	LayoutStyle,
-	LayoutMode,
 	Positioning,
 } from '../types';
-import { AuthLayout, EmptyLayout, DashboardLayout } from '../components';
+
+import { CenteredBoxLayout, EmptyLayout, DashboardLayout, TwoColumnLayout } from '../components';
 
 export const LayoutMap = {
-	[Layouts.Auth]: AuthLayout,
-	[Layouts.Empty]: EmptyLayout,
-	[Layouts.Dashboard]: DashboardLayout,
+	[LayoutStyle.CenteredBox]: CenteredBoxLayout,
+	[LayoutStyle.Empty]: EmptyLayout,
+	[LayoutStyle.Dashboard]: DashboardLayout,
+	[LayoutStyle.TwoColumn]: TwoColumnLayout,
 };
 
 const defaultSettings: ISettings = {
-	style: LayoutStyle.Vertical,
-	mode: LayoutMode.FullWidth,
 	containerWidth: '1570px',
 	navbar: {
 		display: true,
@@ -81,7 +79,7 @@ export const LayoutContextProvider = (props: IAppLayoutProps) => {
 		location,
 	);
 
-	const layoutStyle = activeRoute?.layout?.mode ?? Layouts.Empty;
+	const layoutStyle = activeRoute?.layout?.style ?? LayoutStyle.Empty;
 	const PageLayout = LayoutMap[layoutStyle];
 	const layoutId = `layout-${layoutStyle}`;
 
@@ -94,8 +92,14 @@ export const LayoutContextProvider = (props: IAppLayoutProps) => {
 
 	const updateNavigation = useCallback((value: Partial<INavigation>) => {
 		setNavigation((prevValue) => ({
-			...prevValue,
-			...value,
+			navbar: [
+				...(prevValue?.navbar ?? []),
+				...(value.navbar ?? []),
+			],
+			toolbar: [
+				...(prevValue?.toolbar ?? []),
+				...(value.toolbar ?? []),
+			],
 		}));
 	}, []);
 

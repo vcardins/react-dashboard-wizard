@@ -1,6 +1,6 @@
 import { CSSProperties } from 'react';
 
-import { Positioning, LayoutStyle, LayoutMode } from './';
+import { Positioning } from './';
 
 interface INavigationSettings {
 	display: boolean;
@@ -9,8 +9,6 @@ interface INavigationSettings {
 }
 
 export interface ISettings {
-	style: LayoutStyle;
-	mode: LayoutMode;
 	containerWidth: CSSProperties['width'];
 	navbar: INavigationSettings & {
 		position: Positioning.Left | Positioning.Right;

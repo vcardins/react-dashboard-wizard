@@ -52,11 +52,11 @@ export const Title = () => {
 			}
 			<StyledAppTitleWrapper>
 				<StyledAppTitle id={ids?.title} variant="h6" noWrap>
-					{metadata.short_name}
+					{metadata.name}
 				</StyledAppTitle>
 				{metadata.name ? (
 					<StyledAppSubTitle id={ids?.subTitle} variant="subtitle2" noWrap>
-						{metadata.name}
+						{metadata.description}
 					</StyledAppSubTitle>
 				) : null}
 			</StyledAppTitleWrapper>

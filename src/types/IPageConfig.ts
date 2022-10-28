@@ -1,9 +1,7 @@
-import { IRoute } from './IRoute';
-import { Layouts } from './Layouts';
-import { UserRoles } from './UserRoles';
+import { IRoute, IPageLayout } from './';
 
-export interface IPageConfig {
-	allowedRoles?: UserRoles[];
-	routes: IRoute[];
-	layout: Layouts;
+export interface IPageConfig<TPermission = string> {
+	permissions?: TPermission[];
+	routes: IRoute<TPermission>[];
+	layout?: IPageLayout;
 }

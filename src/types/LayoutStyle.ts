@@ -1,4 +1,6 @@
 export enum LayoutStyle {
-	Vertical = 'Vertical',
-	Horizontal = 'Horizontal',
+	CenteredBox = 'centered-box',
+	Empty = 'empty',
+	Dashboard = 'dashboard',
+	TwoColumn = 'two-column',
 }

@@ -2,8 +2,7 @@ import { ReactNode } from 'react';
 
 import { IRoute, IAppConfig, INavigation, ISettings } from './';
 
-export interface IAppLayoutProps
-	extends Pick<IAppConfig, 'theme' | 'pages' | 'onRouteChange' | 'navigation' | 'metadata' | 'Icon'> {
+export interface IAppLayoutProps extends Pick<IAppConfig, 'theme' | 'navigation' | 'metadata' | 'Icon'> {
 	children?: ReactNode;
 	components?: {
 		header?: ReactNode;
@@ -25,7 +24,7 @@ export interface ILayoutProps {
 	renderedRoutes: ReactNode;
 }
 
-export interface IAppLayoutContext extends Omit<IAppLayoutProps, 'pages' | 'name' | 'theme' | 'settings'>, ILayoutProps {
+export interface IAppLayoutContext extends Omit<IAppLayoutProps, 'name' | 'theme' | 'settings'>, ILayoutProps {
 	settings: ISettings;
 	toggleNavPane: (value: boolean) => void;
 	updateNavigation: (value: INavigation) => void;

@@ -33,7 +33,7 @@ export const Title = styled('div')`
 
 const forwardProps = ['autoWidth'];
 
-export const Content = styled(Box, { shouldForwardProp: (prop) => !forwardProps.includes(prop as string) })<IFramesetContentProps>(({ margin, autoWidth, overflow, theme }) => `
+export const Content = styled(Box, { shouldForwardProp: (prop) => !forwardProps.includes(prop as string) })<IFramesetContentProps>(({ margin, autoWidth, overflow }) => `
 	position: relative;
 	width: 100%;
 	overflow: ${overflow};
