@@ -4,7 +4,7 @@ import { PropsWithChildren, ReactElement } from 'react';
 
 import { Theme } from '@mui/material';
 
-import { IManifest, INavigation, IPageConfig, IRoute } from './';
+import { IManifest, INavigation, IPageConfig } from './';
 
 export interface IAppConfig {
 	container?: string;
@@ -18,5 +18,4 @@ export interface IAppConfig {
 	App?: () => ReactElement;
 	Providers?: (props: PropsWithChildren<unknown>) => ReactElement;
 	version?: string | ReactElement;
-	onRouteChange?: (route: IRoute) => void;
 }

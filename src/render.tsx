@@ -3,9 +3,9 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 import { IAppConfig } from './types';
-import { LayoutContextProvider } from './context';
+import { LayoutContextProvider, RoutingContextProvider } from './context';
 
-export const mount = (props: IAppConfig) => {
+export const render = (props: IAppConfig) => {
 	const {
 		container = 'root',
 		basename,
@@ -18,9 +18,22 @@ export const mount = (props: IAppConfig) => {
 
 	const node = (
 		<Router basename={basename}>
-			<Providers>{App ? <App /> : <LayoutContextProvider {...rest} />}</Providers>
+			<RoutingContextProvider
+				pages={rest.pages}
+				name={rest.metadata.short_name}
+			>
+				<Providers>
+					{App
+						? <App />
+						: <LayoutContextProvider {...rest} />
+					}
+				</Providers>
+			</RoutingContextProvider>
 		</Router>
 	);
 
-	root.render(strictMode ? <StrictMode>{node}</StrictMode> : node);
+	root.render(strictMode
+		? <StrictMode>{node}</StrictMode>
+		: node
+	);
 };

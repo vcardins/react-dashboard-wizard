@@ -1,5 +1,4 @@
-import { useMemo, createContext, useContext, useEffect, useState, useCallback } from 'react';
-import { matchRoutes, RouteObject, useLocation, useRoutes } from 'react-router-dom';
+import { useMemo, createContext, useContext, useState, useCallback } from 'react';
 import { ThemeProvider as MuiThemeProvider, CssBaseline } from '@mui/material';
 import { ThemeProvider as EmotionThemeProvider } from '@emotion/react';
 
@@ -12,6 +11,7 @@ import {
 	ISettings,
 	Positioning,
 } from '../types';
+import { useRoutingContext } from './RoutingContext';
 
 import { CenteredBoxLayout, EmptyLayout, DashboardLayout, TwoColumnLayout } from '../components';
 
@@ -50,34 +50,11 @@ const LayoutContext = createContext<IAppLayoutContext>({
 });
 
 export const LayoutContextProvider = (props: IAppLayoutProps) => {
-	const { metadata, children, pages, theme, onRouteChange, ...rest } = props;
+	const { metadata, children, theme, ...rest } = props;
 	const [isNavPaneOpen, toggleNavPane] = useState(!!rest.isNavPaneOpen);
 	const [settings, setSettings] = useState({ ...defaultSettings, ...rest.settings });
 	const [navigation, setNavigation] = useState(rest.navigation);
-
-	const location = useLocation();
-	const routes = pages.flatMap(({ routes, allowedRoles, layout }) =>
-		routes.map((route) => ({ allowedRoles, layout, ...route })),
-	) as IRoute[];
-	const activeRoute = matchRoutes(routes as RouteObject[], location)?.[0]?.route as IRoute;
-
-	const routesValues = routes as RouteObject[];
-
-	useEffect(() => {
-		if (activeRoute) {
-			document.title = `[${metadata.name}] - ${activeRoute.metadata?.title}`;
-			onRouteChange?.(activeRoute);
-		}
-
-		return () => {
-			document.title = '';
-		};
-	}, [metadata.name, activeRoute, onRouteChange]);
-
-	const renderedRoutes = useRoutes(
-		routesValues.map(({ caseSensitive, path, element, children }) => ({ caseSensitive, path, element, children })),
-		location,
-	);
+	const { renderedRoutes, activeRoute } = useRoutingContext();
 
 	const layoutStyle = activeRoute?.layout?.style ?? LayoutStyle.Empty;
 	const PageLayout = LayoutMap[layoutStyle];

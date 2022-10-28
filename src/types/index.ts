@@ -9,6 +9,7 @@ export * from './INavItem';
 export * from './IPageConfig';
 export * from './IPageMetaData';
 export * from './IRoute';
+export * from './IRoutingContext';
 export * from './ISettings';
 
 // enums
